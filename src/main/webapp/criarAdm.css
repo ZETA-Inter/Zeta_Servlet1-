@@ -1,0 +1,178 @@
+body {
+    margin: 0;
+    top: 0;
+    padding: 0;
+    font-family: 'Poppins', serif;
+    width: 100%;
+    overflow-x: hidden;
+}
+.container {
+    display: flex;
+    gap: 650px;
+    margin: 0 auto;
+    margin-top: 34px;
+}
+.logo {
+    width: 82.748px;
+    height: 80.198px;
+    color: #043253;
+    font-size: 25px;
+    font-weight: 500px;
+    display: flex;
+    gap: 16px;
+}
+.logo>img {
+    margin-bottom: 10px;
+    margin-left: 127px;
+}
+.logo>span {
+    margin-top: 28%;
+}
+nav > .menu > input{
+    display: none;
+}
+nav > .menu > label > a{
+    color: #000;
+    text-decoration: none;
+}
+nav > .menu > label {
+    cursor: pointer;
+    width: max-content;
+    position: relative;
+    margin-left: 570px;
+}
+.nav {
+    margin-top: 30px;
+    color: #000;
+    font-size: 20px;
+    display: flex;
+    gap: 50px;
+}
+nav > .menu {
+    display: inline-block;
+}
+nav > .menu > label::after{
+    content: "";
+    position: absolute;
+    left: -10%;
+    bottom: 0;
+    height: 3px;
+    width: 120%;
+    background: darkgray;
+    transform:scaleX(0);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    
+}
+nav > .menu > label::before{
+    content: "";
+    position: absolute;
+    left: -10%;
+    bottom: 0;
+    height: 3px;
+    width: 120%;
+    background: #0CC0DF;
+    transform:scaleX(0);
+    transform-origin: center;
+    transition: transform 0.5s ease;
+}
+nav > .menu > label:hover::after {
+    opacity: 0.4;
+    transform: scaleX(0.86);
+}
+nav > .menu > input:checked + label::before{
+    transform: scaleX(0.86);
+}
+nav > .menu > input:checked + label::after{
+    background: transparent; 
+}
+.sidebar {
+    position: fixed;
+    top: 25%;
+    left: 8.3%;
+    width: 70px;
+    height: 57%;
+    background-color: #0076B6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    gap: 30px;
+    border-radius: 35px;
+}
+.icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.icon img {
+    width: 24px;
+    height: 24px;
+}
+.icon:hover {
+    background-color: #004C74;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    transform: scale(1.3);
+}
+
+.inserirADM > h1{
+    width: 100%;
+    font-size: 80px;
+    color: #043253;
+    text-align: center;
+    font-weight: lighter;
+    margin-top: 50px;
+}
+.inserirADM > h2{
+    color: #18a4e1;
+    width: 100%;
+    text-align: center;
+    font-weight: lighter;
+    margin-top: -60px;
+}
+.campos{
+    text-align: center;
+    margin-top: 50px;
+}
+.campos > form{
+    display: grid;
+    width: 37%;
+    height: 20%;
+    margin: 0 auto;
+    gap: 30px;
+}
+.campos > form > input{
+    border: 2px solid #18a4e1;
+    border-radius: 15px;
+    box-shadow: 1px 1px 3px;
+    padding: 16px;
+    font-family: 'Poppins', serif;
+    font-size: 16px;
+    font-weight: lighter;
+    outline: none;
+}
+.campos > form > input:active{
+    border: 3px solid #18a4e1;
+}
+
+.campos > form > button{
+    border-radius: 20px;
+    width: 200px;
+    height: 50px;
+    border: solid;
+    font-family: 'Poppins', serif;
+    font-size: 20px;
+    color: aliceblue;
+    background-color: #18a4e1;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.campos > form > button:hover{
+    background-color: #0076B6;
+    transform: scale(1.1);
+}

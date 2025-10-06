@@ -2,6 +2,7 @@ package com.zeta_servlet.model;
 
 
 
+
 public class Lei {
     int id;
     String lei;

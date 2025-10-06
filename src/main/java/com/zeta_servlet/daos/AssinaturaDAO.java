@@ -1,9 +1,10 @@
 package com.zeta_servlet.daos;
 
 import com.zeta_servlet.daos.JDBC.Conexao;
-import ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
 import com.zeta_servlet.model.Assinatura;
 import com.zeta_servlet.CRUD.CRUD;
+
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -15,6 +16,8 @@ import java.util.List;
 
 public class AssinaturaDAO extends CRUD{
 
+
+//    insere itens na tabela Assinatura
     public int inserir(Assinatura assinatura) {
         Connection conn = null;
         Conexao conexao = new Conexao();
@@ -53,11 +56,13 @@ public class AssinaturaDAO extends CRUD{
         }
     }
 
+
+//    altera preço por produtor na tabela
     public int updatePrecoQtdProdutores(Assinatura assinatura, BigDecimal money) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE assinatura SET preco_qtd_produtores = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE assinatura SET preco_qtd_produtoresx = ? WHERE id = ?;");
             pstm.setBigDecimal(1, money);
             pstm.setInt(2, assinatura.getId());
             if (pstm.executeUpdate()>0){
@@ -71,15 +76,16 @@ public class AssinaturaDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
+//    altera o tipo de plano de um item
     public int updateTp_Plano(Assinatura assinatura, String tp_plano) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE assinatura SET tp_plano = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE assinatura SET tp_plano = ? WHERE id = ?;");
             pstm.setString(1, tp_plano);
             pstm.setInt(2, assinatura.getId());
             if (pstm.executeUpdate()>0){
@@ -93,15 +99,16 @@ public class AssinaturaDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
+//    altera a quantidade de cursos disponíveis por assinatura
     public int updateBnfQtdCurso(Assinatura assinatura, int cursos) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE assinatura SET benef_qtd_cursos = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE assinatura SET benef_qtd_cursos = ? WHERE id = ?;");
             pstm.setInt(1, cursos);
             pstm.setInt(2, assinatura.getId());
             if (pstm.executeUpdate()>0){
@@ -115,15 +122,16 @@ public class AssinaturaDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
+//  altera a descrição do banco
     public int updatebenefDescPlno(Assinatura assinatura, String desc) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE assinatura SET benef_desc_plno = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE assinatura SET benef_desc_plno = ? WHERE id = ?;");
             pstm.setString(1, desc);
             pstm.setInt(2, assinatura.getId());
             if (pstm.executeUpdate()>0){
@@ -137,15 +145,16 @@ public class AssinaturaDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
+//    altera o preço base de uma assinatura
     public int updatePreco_fixo(Assinatura assinatura, BigDecimal money) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE assinatura SET preco_fixo = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE assinatura SET preco_fixo = ? WHERE id = ?;");
             pstm.setBigDecimal(1, money);
             pstm.setInt(2, assinatura.getId());
             if (pstm.executeUpdate()>0){
@@ -159,15 +168,17 @@ public class AssinaturaDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
 
 
-
+// remove um item da tabela
     public boolean remover(int id) {return super.remover(id, "Assinatura");}
 
+
+//    seleciona todos os itens da tabela
     public List<Assinatura> buscar() {
         //query
         List<Assinatura> liASS = new ArrayList<>();
@@ -203,6 +214,8 @@ public class AssinaturaDAO extends CRUD{
         }
     }
 
+
+//    busca um item da tabela com base no ID
     public List<Assinatura> buscarPorId(int id) {
         //query
         List<Assinatura> liASS = new ArrayList<>();
@@ -240,6 +253,8 @@ public class AssinaturaDAO extends CRUD{
         }
     }
 
+
+//    busca um plano com base no tipo de plano
     public List<Assinatura> buscarPorTpPlano(String plano) {
         //query
         List<Assinatura> liASS = new ArrayList<>();
@@ -277,6 +292,8 @@ public class AssinaturaDAO extends CRUD{
         }
     }
 
+
+//    busca assinaturas com base na quantidade de cursos disponíveis
     public List<Assinatura> buscarPorQtdCursos(int qtd) {
         //query
         List<Assinatura> liASS = new ArrayList<>();
@@ -315,6 +332,8 @@ public class AssinaturaDAO extends CRUD{
     }
 
 
+//    busca itens da tabela com base no preço base da assinatura
+
     public List<Assinatura> buscarPorFixo(BigDecimal money) {
         //query
         List<Assinatura> liASS = new ArrayList<>();
@@ -352,7 +371,7 @@ public class AssinaturaDAO extends CRUD{
         }
     }
 
-
+//  busca itens na tabela com base no preço por produtor
     public List<Assinatura> buscarPrecoQtdProdutores(BigDecimal money) {
         //query
         List<Assinatura> liASS = new ArrayList<>();

@@ -1,8 +1,7 @@
 package com.zeta_servlet.daos;
 
-
 import com.zeta_servlet.daos.JDBC.Conexao;
-import ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
 import com.zeta_servlet.model.Atividade;
 import com.zeta_servlet.CRUD.CRUD;
 import com.zeta_servlet.model.Pergunta;
@@ -18,6 +17,7 @@ import java.util.List;
 
 public class AtividadeDAO extends CRUD{
 
+//    insere um item na tabela
     public int inserir(Atividade atv) {
         Connection conn = null;
         Conexao conexao = new Conexao();
@@ -57,6 +57,7 @@ public class AtividadeDAO extends CRUD{
         catch (SQLException | NullPointerException | IndexOutOfBoundsException | IllegalArgumentException | IllegalStateException e){
             ExceptionHandler eh = new ExceptionHandler(e);
             eh.printExeption();
+            e.printStackTrace();
             return -1;
         }
         catch (Exception e) {
@@ -69,13 +70,13 @@ public class AtividadeDAO extends CRUD{
         }
     }
 
-
+//  altera a pontuação da atividade
 
     public int updatePontuacao(Atividade atv, double pontucao) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE atividade SET pontuacao = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE atividade SET pontuacao = ? WHERE id = ?;");
             pstm.setDouble(1, pontucao);
             pstm.setInt(2, atv.getId());
             if (pstm.executeUpdate()>0){
@@ -89,14 +90,16 @@ public class AtividadeDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
+
+//    altera a imagem da atividade
     public int updateImagensUrl(Atividade atv, String url) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE atividade SET fk_Imagens_url = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE atividade SET fk_Imagens_url = ? WHERE id = ?;");
             pstm.setString(1, url);
             pstm.setInt(2, atv.getId());
             if (pstm.executeUpdate()>0){
@@ -110,12 +113,14 @@ public class AtividadeDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
+//    remove uma atividade
     public boolean remover(int id) {return super.remover(id, "atividade");}
 
+//    seleciona todas as atividades da tabela
     public List<Atividade> buscar() {
         //query
         List<Atividade> liAT = new ArrayList<>();
@@ -165,6 +170,8 @@ public class AtividadeDAO extends CRUD{
             return liAT;
         }
     }
+
+//    busca uma atividade por ID
 
     public List<Atividade> buscarPorId(int id) {
         //query
@@ -217,6 +224,8 @@ public class AtividadeDAO extends CRUD{
         }
     }
 
+
+//    busca atividades com base na pontuação
 
     public List<Atividade> buscarPorPontuacao(double pontuacao) {
         //query
@@ -272,6 +281,7 @@ public class AtividadeDAO extends CRUD{
     }
 
 
+//    busca atividade com base na aula
 
     public List<Atividade> buscarPorIdAula(int idAula) {
         //query
@@ -326,6 +336,7 @@ public class AtividadeDAO extends CRUD{
         }
     }
 
+//    busca atividades com base na imagem
     public List<Atividade> buscarPorImagemURl(String imagemURL) {
         //query
         List<Atividade> liAT = new ArrayList<>();

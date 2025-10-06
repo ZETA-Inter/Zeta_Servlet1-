@@ -1,6 +1,6 @@
 package com.zeta_servlet.daos.JDBC;
 
-import ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.Connection;

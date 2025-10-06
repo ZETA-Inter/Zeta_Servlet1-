@@ -1,7 +1,12 @@
 package com.zeta_servlet;
+import com.zeta_servlet.daos.AdmDAO;
 import com.zeta_servlet.daos.FornecedorDAO;
-import ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.model.Adm;
 import com.zeta_servlet.model.Fornecedor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,12 +38,6 @@ public class Main {
 //            System.out.println("Não funcionou");
 //        }
 
-
-
-
-
-
-
 //        if (adm.inserir(adm1) == 1){
 //            System.out.println("Administrador cadrastado com sucesso!");
 //        }
@@ -60,9 +59,24 @@ public class Main {
 
 
 
-    FornecedorDAO fornecedorDAO = new FornecedorDAO();
-    System.out.println(fornecedorDAO.buscar());
-
-
+//    FornecedorDAO fornecedorDAO = new FornecedorDAO();
+//    System.out.println(fornecedorDAO.buscar());
+        try {
+            AdmDAO admDAO = new AdmDAO();
+//            int id=1;
+//            List<Adm> liA = new ArrayList<>();
+//            liA=admDAO.buscarId(id);
+//            if (admDAO.updateSenha(liA.get(0), "Senha")>0){
+//                System.out.println("Funcionou");
+//            }
+//            else{
+//                System.out.println("Erro");
+//            }
+            System.out.println(0/0);
+        }catch (Exception e){
+            ExceptionHandler eh = new ExceptionHandler(e);
+            eh.printExeption();
+            e.printStackTrace();
+        }
     }//main
 }//class

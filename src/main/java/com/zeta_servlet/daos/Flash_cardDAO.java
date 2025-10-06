@@ -1,8 +1,7 @@
 package com.zeta_servlet.daos;
 
-
 import com.zeta_servlet.daos.JDBC.Conexao;
-import ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
 import com.zeta_servlet.CRUD.CRUD;
 import com.zeta_servlet.model.Flash_card;
 
@@ -15,6 +14,7 @@ import java.util.List;
 
 public class Flash_cardDAO extends CRUD{
 
+//  insere um flash card no banco
     public int inserir(Flash_card flash) {
         Connection conn = null;
         Conexao conexao = new Conexao();
@@ -49,11 +49,12 @@ public class Flash_cardDAO extends CRUD{
         }
     }
 
+//    altera o flash card
     public int updateFlashCard(Flash_card flash) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE flash_card SET flash_card = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE flash_card SET flash_card = ? WHERE id = ?;");
             pstm.setString(1, flash.getFlash_card());
             pstm.setInt(2, flash.getId());
             if (pstm.executeUpdate()>0){
@@ -72,15 +73,16 @@ public class Flash_cardDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
+//    altera a aula do flash card
     public int updateIdAula(Flash_card flash) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE flash_card SET id_aula = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE flash_card SET id_aula = ? WHERE id = ?;");
             pstm.setInt(1, flash.getId_aula());
             pstm.setInt(2, flash.getId());
             if (pstm.executeUpdate()>0){
@@ -94,12 +96,14 @@ public class Flash_cardDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
+//    remove um flash card
     public boolean remover(int id) {return super.remover(id, "flash_card");}
 
+//    seleciona todos os flash cards da tabela
     public List<Flash_card> buscar() {
         //query
         List<Flash_card> liF = new ArrayList<>();
@@ -133,6 +137,8 @@ public class Flash_cardDAO extends CRUD{
         }
     }
 
+
+//    busca o item da tabela com base no flash card
     public List<Flash_card> buscarPorFlashCard(String flash_card) {
         //query
         List<Flash_card> liF = new ArrayList<>();
@@ -168,6 +174,7 @@ public class Flash_cardDAO extends CRUD{
         }
     }
 
+//    seleciona o flash card com base na aula
     public List<Flash_card> buscarPorIdAula(int id_aula) {
         //query
         List<Flash_card> liF = new ArrayList<>();

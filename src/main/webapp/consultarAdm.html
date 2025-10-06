@@ -51,12 +51,12 @@
             </div>
         </div>
         <div class="campos">
-            <form>
+            <form action="buscaAdm" method="get">
                 <label>ID</label>
                 <input type="number" placeholder="ID" name="id" id="id">
                 <label>Email</label>
                 <input type="email" placeholder="Email" name="email" id="email"/>
-                <button type="submit">Buscar</button>
+                <button type="submit" >Buscar</button>
             </form>
         </div>
         <div class="tabela">
@@ -70,14 +70,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>sla@gmail.com</td>
-                        <td>sla123#</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>dasfa@hotmail.com</td>
-                        <td>dasfa123%%</td>
+                        <td name="idBusca">1</td>
+                        <td name="emailBusca">sla@gmail.com</td>
+                        <td name="senhaBusca">sla123#</td>
                     </tr>
                 </tbody>
             </table>

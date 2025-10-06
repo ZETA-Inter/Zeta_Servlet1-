@@ -1,6 +1,5 @@
 package com.zeta_servlet.model;
 
-
 import java.time.LocalDate;
 
 public class Produtor {

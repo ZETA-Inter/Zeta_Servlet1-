@@ -1,8 +1,8 @@
 package com.zeta_servlet.daos;
 
-import com.zeta_servlet.CRUD.CRUD;
 import com.zeta_servlet.daos.JDBC.Conexao;
-import ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.CRUD.CRUD;
 import com.zeta_servlet.model.Produtor;
 
 import java.util.List;
@@ -17,21 +17,22 @@ import java.util.ArrayList;
 
 public class ProdutorDAO extends CRUD {
 
-    public int inserir(Produtor pcd) {
+//    adiciona um produtor na tabela
+    public int inserir(Produtor produtor) {
         Conexao conexao = new Conexao();
         Connection conn = conexao.conectar();
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("Insert into produtor(cpf, dt_nascimento, email, senha, pontos_acumulados, nome_primeiro, nome_ultimo, aulas_feitas) values (?, ? , ?, ?, ?, ?, ?, ?)");
 
-            pstmt.setString(1, pcd.getCpf());
-            pstmt.setObject(2, pcd.getDt_nascimento());
-            pstmt.setString(3, pcd.getEmail());
-            pstmt.setString(4, pcd.getSenha());
-            pstmt.setInt(5, pcd.getPontos_acumulados());
-            pstmt.setString(6, pcd.getNome_primeiro());
-            pstmt.setString(7, pcd.getNome_ultimo());
-            pstmt.setInt(8, pcd.getAulas_feitas());
+            pstmt.setString(1, produtor.getCpf());
+            pstmt.setObject(2, produtor.getDt_nascimento());
+            pstmt.setString(3, produtor.getEmail());
+            pstmt.setString(4, produtor.getSenha());
+            pstmt.setInt(5, produtor.getPontos_acumulados());
+            pstmt.setString(6, produtor.getNome_primeiro());
+            pstmt.setString(7, produtor.getNome_ultimo());
+            pstmt.setInt(8, produtor.getAulas_feitas());
 
             if (pstmt.executeUpdate() > 0) {
                 return 1;
@@ -53,6 +54,7 @@ public class ProdutorDAO extends CRUD {
         }
     }
 
+//    altera a senha de um produtor
     public int updateSenha(Produtor pcd, String senha) {
         Conexao conexao = new Conexao();
         Connection conn = conexao.conectar();
@@ -84,6 +86,7 @@ public class ProdutorDAO extends CRUD {
         }
     }
 
+//    altera o email de um produtor
     public int updateEmail(Produtor pcd, String email) {
         Conexao conexao = new Conexao();
         Connection conn = conexao.conectar();
@@ -115,6 +118,7 @@ public class ProdutorDAO extends CRUD {
         }
     }
 
+//    altera o primeiro nome do produtor
     public int alterarPrimeiroNome(Produtor pcd, String nome_primeiro){
         Conexao conexao = new Conexao();
         Connection conn = conexao.conectar();
@@ -150,6 +154,7 @@ public class ProdutorDAO extends CRUD {
         }
     }
 
+//    altera o sobrenome do produtor
     public int alterarUltimoNome(String novo_nome_ultimo,  int idProdutor){
         Conexao conexao = new Conexao();
         Connection conn = conexao.conectar();
@@ -182,10 +187,10 @@ public class ProdutorDAO extends CRUD {
             conexao.desconectar(conn);
         }
     }
-
+//  remove um produtor
     public boolean remover(int id) {return super.remover(id, "produtor");}
 
-
+//  seleciona todos os produtores da tabela
     public List<Produtor> buscar(){
 
         Conexao conexao = new Conexao();
@@ -220,6 +225,7 @@ public class ProdutorDAO extends CRUD {
 
     }
 
+//    seleciona um produtor pelo ID
     public List<Produtor> buscarPorID(int id){
             Conexao conexao = new Conexao();
             Connection conn = conexao.conectar();
@@ -250,6 +256,7 @@ public class ProdutorDAO extends CRUD {
             }
     }
 
+//    seleciona o produtor com base no CPF
     public List<Produtor> buscarPorCPF(String cpf){
         List<Produtor> listaProdt = new ArrayList<>();
         Conexao conexao = new Conexao();
@@ -281,6 +288,7 @@ public class ProdutorDAO extends CRUD {
 
     }
 
+//    seleciona
     public List<Produtor> buscarPorPontosAcumulados(int pontos_acumulados){
         Conexao conexao = new Conexao();
         Connection conn = conexao.conectar();

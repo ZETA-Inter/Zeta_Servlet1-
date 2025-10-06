@@ -1,7 +1,8 @@
 package com.zeta_servlet.daos;
-import com.zeta_servlet.CRUD.CRUD;
+
 import com.zeta_servlet.daos.JDBC.Conexao;
-import ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.CRUD.CRUD;
 import com.zeta_servlet.model.Fornecedor;
 
 import java.sql.*;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FornecedorDAO extends CRUD{
+
+//    insere um fornecedor na tabela
     public int inserir(Fornecedor forc) {
         Connection conn = null;
         Conexao conexao = new Conexao();
@@ -46,6 +49,7 @@ public class FornecedorDAO extends CRUD{
     }
 
 
+//    altera a empresa do fornecedor
 
     public int updateEmpresa(Fornecedor forc, int id_empresa) {
         Conexao conexao = new Conexao();
@@ -69,11 +73,13 @@ public class FornecedorDAO extends CRUD{
         }
     }
 
+
+//    altera a senha do fornecedor
     public int updateSenha(Fornecedor forc, String senha) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE FORNECEDOR SET senha = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE FORNECEDOR SET senha = ? WHERE id = ?;");
             pstm.setString(1, senha);
             pstm.setInt(2, forc.getId());
             if (pstm.executeUpdate()>0){
@@ -87,15 +93,16 @@ public class FornecedorDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
-    public int updateSenha(Fornecedor forc, int id_assinatura) {
+//    altera a assinatura do fornecedor
+    public int updateIdAssinatura(Fornecedor forc, int id_assinatura) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE FORNECEDOR SET id_assinatura = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE FORNECEDOR SET id_assinatura = ? WHERE id = ?;");
             pstm.setInt(1, id_assinatura);
             pstm.setInt(2, forc.getId());
             if (pstm.executeUpdate()>0){
@@ -109,15 +116,16 @@ public class FornecedorDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
-    public int updateEmail(String email, Fornecedor forc) {
+//    altera o email do fornecedor
+    public int updateEmail(Fornecedor forc, String email) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE fornecedor SET email = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE fornecedor SET email = ? WHERE id = ?;");
             pstm.setString(1, email);
             pstm.setInt(2, forc.getId());
             if (pstm.executeUpdate()>0){
@@ -131,10 +139,11 @@ public class FornecedorDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
+//    verifica se o fornecedor existe na tabela
     public int verificarDados(Fornecedor forc){
         ResultSet rset=null;
         int id;
@@ -171,9 +180,10 @@ public class FornecedorDAO extends CRUD{
         }
     }
 
-
+//  remove um fornecedor
     public boolean remover(int id) {return super.remover(id, "Fornecedor");}
 
+//  seleciona todos os fornecedores da tabela
 
     public List<Fornecedor> buscar() {
         //query
@@ -206,6 +216,8 @@ public class FornecedorDAO extends CRUD{
             return liFOR;
         }
     }
+
+//    busca o fornecedor com base no ID
 
     public
     List<Fornecedor> buscarId(int id) {
@@ -240,6 +252,8 @@ public class FornecedorDAO extends CRUD{
             return liFOR;
         }
     }
+
+//    busca o fornecedor com base no sobrenome
 
     public List<Fornecedor> buscarPorNomeUlt(String nome) {
         //query
@@ -282,6 +296,8 @@ public class FornecedorDAO extends CRUD{
         }
     }
 
+//    busca um fornecedor com base no email
+
     public List<Fornecedor> buscarPorEmail(String email) {
         //query
         List<Fornecedor> liFOR = new ArrayList<>();
@@ -316,6 +332,8 @@ public class FornecedorDAO extends CRUD{
         }
     }
 
+//    busca fornecedores com base na assinatura
+
     public List<Fornecedor> buscarPorAssinatura(int assinatura) {
         //query
         List<Fornecedor> liFOR = new ArrayList<>();
@@ -349,6 +367,9 @@ public class FornecedorDAO extends CRUD{
             return liFOR;
         }
     }
+
+//    busca fornecedores com base na empresa
+
     public List<Fornecedor> buscarPorEmpresa(int empresa) {
         //query
         List<Fornecedor> liFOR = new ArrayList<>();
@@ -381,6 +402,8 @@ public class FornecedorDAO extends CRUD{
             return liFOR;
         }
     }
+
+//    busca fornecedores pelo primeiro nome
 
     public List<Fornecedor> buscarPorNomePrimeiro(String nome) {
         //query

@@ -1,12 +1,13 @@
 package com.zeta_servlet.daos;
 
 import com.zeta_servlet.daos.JDBC.Conexao;
-import ExceptionHandler.ExceptionHandler;
-import com.zeta_servlet.model.Aula;
+import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
 import com.zeta_servlet.CRUD.CRUD;
-import com.zeta_servlet.model.Flash_card;
+import com.zeta_servlet.model.Aula;
 import com.zeta_servlet.model.Lei;
+import com.zeta_servlet.model.Flash_card;
 import com.zeta_servlet.model.Texto_corrido;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class AulaDAO extends CRUD{
 
+//    insere aulas na tabela
     public int inserir(Aula aula) {
         Connection conn = null;
         Conexao conexao = new Conexao();
@@ -79,12 +81,12 @@ public class AulaDAO extends CRUD{
     }
 
 
-
+//  altera o nome de uma aula
     public int updateNome(Aula aula, String nome) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE aula SET nome = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE aula SET nome = ? WHERE id = ?;");
             pstm.setString(1, nome);
             pstm.setInt(2, aula.getId());
             if (pstm.executeUpdate()>0){
@@ -98,14 +100,16 @@ public class AulaDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
+
+//    altera a descrição de uma aula
     public int updateDescricao(Aula aula, String desc) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE aula SET descricao = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE aula SET descricao = ? WHERE id = ?;");
             pstm.setString(1, desc);
             pstm.setInt(2, aula.getId());
             if (pstm.executeUpdate()>0){
@@ -119,12 +123,15 @@ public class AulaDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
+
+//    remove uma aula da tabela
     public boolean remover(int id) {return super.remover(id, "aula");}
 
+//    seleciona todos os itens da tabela
     public List<Aula> buscar() {
         //query
         List<Aula> liAU = new ArrayList<>();
@@ -184,6 +191,7 @@ public class AulaDAO extends CRUD{
         }
     }
 
+//    seleciona uma aula com base no ID
     public List<Aula> buscarPorId(int id) {
         //query
         List<Aula> liAU = new ArrayList<>();
@@ -243,6 +251,7 @@ public class AulaDAO extends CRUD{
         }
     }
 
+//    busca a aula com base no nome
     public List<Aula> buscarPorNome(String nome) {
         //query
         List<Aula> liAU = new ArrayList<>();
@@ -303,6 +312,8 @@ public class AulaDAO extends CRUD{
             return liAU;
         }
     }
+
+//    busca a aula com base no módulo
 
     public List<Aula> buscarPorIdModulo(int id_modulo) {
         //query

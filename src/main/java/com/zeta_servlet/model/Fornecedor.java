@@ -1,5 +1,6 @@
 package com.zeta_servlet.model;
 
+
 public class Fornecedor{
     private int id;
     private int idEmpresa;

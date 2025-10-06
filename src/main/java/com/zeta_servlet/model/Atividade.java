@@ -1,5 +1,6 @@
 package com.zeta_servlet.model;
 
+
 import java.util.List;
 
 public class Atividade {

@@ -1,8 +1,7 @@
 package com.zeta_servlet.daos;
 
-
 import com.zeta_servlet.daos.JDBC.Conexao;
-import ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
 import com.zeta_servlet.CRUD.CRUD;
 import com.zeta_servlet.model.Lei;
 
@@ -14,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LeiDAO extends CRUD{
+
+//    insere uma lei na tabela
 
     public int inserir(Lei lei) {
         Connection conn = null;
@@ -49,11 +50,12 @@ public class LeiDAO extends CRUD{
         }
     }
 
+//    altera a lei usada
     public int updateLei(Lei lei) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE lei SET lei = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE lei SET lei = ? WHERE id = ?;");
             pstm.setString(1, lei.getLei());
             pstm.setInt(2, lei.getId());
             if (pstm.executeUpdate()>0){
@@ -67,15 +69,17 @@ public class LeiDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
+
+//    altera a aula referente a lei
     public int updateIdAula(Lei lei) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE lei SET id_aula = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE lei SET id_aula = ? WHERE id = ?;");
             pstm.setInt(1, lei.getId_aula());
             pstm.setInt(2, lei.getId());
             if (pstm.executeUpdate()>0){
@@ -89,12 +93,14 @@ public class LeiDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
+//    remove uma lei
     public boolean remover(int id) {return super.remover(id, "lei");}
 
+//    seleciona todas as leis da tabela
     public List<Lei> buscar() {
         //query
         List<Lei> liL = new ArrayList<>();
@@ -123,6 +129,7 @@ public class LeiDAO extends CRUD{
         }
     }
 
+//    busca a lei com base no ID
     public List<Lei> buscarPorId(int id) {
         //query
         List<Lei> liL = new ArrayList<>();
@@ -158,6 +165,8 @@ public class LeiDAO extends CRUD{
         }
     }
 
+
+//    busca a lei na tabela
     public List<Lei> buscarPorLei(String lei) {
         //query
         List<Lei> liL = new ArrayList<>();
@@ -193,6 +202,7 @@ public class LeiDAO extends CRUD{
         }
     }
 
+//    busca lei pela aula
     public List<Lei> buscarPorIdAula(int id_aula) {
         //query
         List<Lei> liL = new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.zeta_servlet.model;
 
+
 public class Alternativa {
     int id;
     String alternativa;

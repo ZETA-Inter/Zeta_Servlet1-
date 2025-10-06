@@ -1,8 +1,7 @@
 package com.zeta_servlet.daos;
 
-
 import com.zeta_servlet.daos.JDBC.Conexao;
-import ExceptionHandler.ExceptionHandler;
+import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
 import com.zeta_servlet.CRUD.CRUD;
 import com.zeta_servlet.model.Texto_corrido;
 
@@ -51,9 +50,9 @@ public class Texto_corridoDAO extends CRUD{
 
     public int updateTextoCorrido(Texto_corrido texto) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE texto_corrido SET texto_corrido = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE texto_corrido SET texto_corrido = ? WHERE id = ?;");
             pstm.setString(1, texto.getTexto_corrido());
             pstm.setInt(2, texto.getId());
             if (pstm.executeUpdate()>0){
@@ -67,15 +66,15 @@ public class Texto_corridoDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
     public int updateIdAula(Texto_corrido texto) {
         Conexao conexao = new Conexao();
-        Connection conn = conexao.conectar();
+        Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = conn.prepareStatement("UPDATE texto_corrido SET id_aula = ? WHERE id = ?;");
+            PreparedStatement pstm = coon.prepareStatement("UPDATE texto_corrido SET id_aula = ? WHERE id = ?;");
             pstm.setInt(1, texto.getId_aula());
             pstm.setInt(2, texto.getId());
             if (pstm.executeUpdate()>0){
@@ -89,7 +88,7 @@ public class Texto_corridoDAO extends CRUD{
             return -1;
         }
         finally {
-            conexao.desconectar(conn);
+            conexao.desconectar(coon);
         }
     }
 
@@ -157,16 +156,16 @@ public class Texto_corridoDAO extends CRUD{
         }
     }
 
-    public List<Texto_corrido> buscarPorTextoCorrido(String textoCorrido) {
+    public List<Texto_corrido> buscarPorTextoCorrido(String lei) {
         //query
         List<Texto_corrido> liTE = new ArrayList<>();
         ResultSet rset = null;
         Conexao conexao = new Conexao();
         Connection conn = conexao.conectar();
         try {
-            String busca = "SELECT * FROM texto_corrido WHERE texto_corrido = ?";
+            String busca = "SELECT * FROM texto_corrido WHERE lei = ?";
             PreparedStatement pstm = conn.prepareStatement(busca);
-            pstm.setString(1, textoCorrido);
+            pstm.setString(1, lei);
             rset = pstm.executeQuery();
 
 

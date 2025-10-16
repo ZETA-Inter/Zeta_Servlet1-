@@ -25,36 +25,37 @@ public class AulaDAO extends CRUD{
         try {
 
             conn = conexao.conectar(); // abre a conexão com o banco
-            String consulta = "insert into aula(descricao, nome, id_aula) values(?, ?, ?)";
+            String consulta = "insert into aula(nome, id_aula) values(?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(consulta);
             //Setando valores dos parametros
-            pstmt.setString(1, aula.getDescricao());
-            pstmt.setString(2, aula.getNome());
-            pstmt.setInt(3, aula.getId_curso());
+            pstmt.setString(1, aula.getNome());
+            pstmt.setInt(2, aula.getId_curso());
 
             // querys dos outros valores
 
             //query flashCards
             for (int i = 0; i < aula.getFlashCards().size(); i++) {
-                String consultaFlash = "insert into flash(flash_card, id_aula) values(?, ?)";
+                String consultaFlash = "insert into flash_card(frente, verso, id_aula) values(?, ?, ?)";
                 PreparedStatement pstmtFlash = conn.prepareStatement(consultaFlash);
-                pstmt.setString(1, aula.getFlashCards().get(i).getFlash_card());
-                pstmt.setInt(2, aula.getFlashCards().get(i).getId_aula());
+                //Setando valores dos parametros
+                pstmtFlash.setString(1, aula.getFlashCards().get(i).getFrente());
+                pstmtFlash.setString(2, aula.getFlashCards().get(i).getVerso());
+                pstmtFlash.setInt(3, aula.getFlashCards().get(i).getId_aula());
             }
             //query texto_corrido
             for (int i = 0; i < aula.getTexto_corridos().size(); i++) {
                 String consultaTexto = "insert into texto_corrido(texto_corrido, id_aula) values(?, ?)";
-                PreparedStatement pstmtFlash = conn.prepareStatement(consultaTexto);
-                pstmt.setString(1, aula.getTexto_corridos().get(i).getTexto_corrido());
-                pstmt.setInt(2, aula.getTexto_corridos().get(i).getId_aula());
+                PreparedStatement pstmtText = conn.prepareStatement(consultaTexto);
+                pstmtText.setString(1, aula.getTexto_corridos().get(i).getTexto_corrido());
+                pstmtText.setInt(2, aula.getTexto_corridos().get(i).getId_aula());
             }
 
             //query lei
             for (int i = 0; i < aula.getLeis().size(); i++) {
                 String consultaTexto = "insert into lei(lei, id_aula) values(?, ?)";
-                PreparedStatement pstmtFlash = conn.prepareStatement(consultaTexto);
-                pstmt.setString(1, aula.getLeis().get(i).getLei());
-                pstmt.setInt(2, aula.getLeis().get(i).getId_aula());
+                PreparedStatement pstmtLei = conn.prepareStatement(consultaTexto);
+                pstmtLei.setString(1, aula.getLeis().get(i).getLei());
+                pstmtLei.setInt(2, aula.getLeis().get(i).getId_aula());
             }
 
 
@@ -104,30 +105,6 @@ public class AulaDAO extends CRUD{
         }
     }
 
-//    altera a descrição de uma aula
-    public int updateDescricao(Aula aula, String desc) {
-        Conexao conexao = new Conexao();
-        Connection coon = conexao.conectar();
-        try {
-            PreparedStatement pstm = coon.prepareStatement("UPDATE aula SET descricao = ? WHERE id = ?;");
-            pstm.setString(1, desc);
-            pstm.setInt(2, aula.getId());
-            if (pstm.executeUpdate()>0){
-                return 1;
-
-            }  return 0;
-        }
-        catch (Exception e){
-            ExceptionHandler eh = new ExceptionHandler(e);
-            eh.printExeption();
-            return -1;
-        }
-        finally {
-            conexao.desconectar(coon);
-        }
-    }
-
-
 //    remove uma aula da tabela
     public boolean remover(int id) {return super.remover(id, "aula");}
 
@@ -154,7 +131,7 @@ public class AulaDAO extends CRUD{
 
                 rsetF = buscarPorIdR(id, "flash_card");
                 while (rsetF.next()) {
-                    Flash_card flash = new Flash_card(rsetF.getInt("id"), rsetF.getString("flash_card"), rsetF.getInt("id_aula"));
+                    Flash_card flash = new Flash_card(rsetF.getInt("id"), rsetF.getString("frente"), rsetF.getString("verso"), rsetF.getInt("id_aula"));
                     liF.add(flash);
                 }
 
@@ -170,7 +147,7 @@ public class AulaDAO extends CRUD{
                     liT.add(texto);
                 }
 
-                Aula aula = new Aula(rsetA.getInt("id"), rsetA.getString("descricao"), rsetA.getString("nome"), rsetA.getInt("id_aula"), liT, liF, liL);
+                Aula aula = new Aula(rsetA.getInt("id"), rsetA.getString("nome"), rsetA.getInt("id_curso"), liT, liF, liL);
                 liAU.add(aula);
             }
 
@@ -214,7 +191,7 @@ public class AulaDAO extends CRUD{
             while (rsetA.next()) {
                 rsetF = buscarPorIdR(id, "flash_card");
                 while (rsetF.next()) {
-                    Flash_card flash = new Flash_card(rsetF.getInt("id"), rsetF.getString("flash_card"), rsetF.getInt("id_aula"));
+                    Flash_card flash = new Flash_card(rsetF.getInt("id"), rsetF.getString("frente"), rsetF.getString("verso"), rsetF.getInt("id_aula"));
                     liF.add(flash);
                 }
 
@@ -230,7 +207,7 @@ public class AulaDAO extends CRUD{
                     liT.add(texto);
                 }
 
-                Aula aula = new Aula(rsetA.getInt("id"), rsetA.getString("descricao"), rsetA.getString("nome"), rsetA.getInt("id_aula"), liT, liF, liL);
+                Aula aula = new Aula(rsetA.getInt("id"), rsetA.getString("nome"), rsetA.getInt("id_curso"), liT, liF, liL);
                 liAU.add(aula);
             }
 
@@ -276,7 +253,7 @@ public class AulaDAO extends CRUD{
 
                 rsetF = buscarPorIdR(id, "flash_card");
                 while (rsetF.next()) {
-                    Flash_card flash = new Flash_card(rsetF.getInt("id"), rsetF.getString("flash_card"), rsetF.getInt("id_aula"));
+                    Flash_card flash = new Flash_card(rsetF.getInt("id"), rsetF.getString("frente"), rsetF.getString("verso"), rsetF.getInt("id_aula"));
                     liF.add(flash);
                 }
 
@@ -292,7 +269,7 @@ public class AulaDAO extends CRUD{
                     liT.add(texto);
                 }
 
-                Aula aula = new Aula(rsetA.getInt("id"), rsetA.getString("descricao"), rsetA.getString("nome"), rsetA.getInt("id_aula"), liT, liF, liL);
+                Aula aula = new Aula(rsetA.getInt("id"), rsetA.getString("nome"), rsetA.getInt("id_curso"), liT, liF, liL);
                 liAU.add(aula);
             }
 
@@ -339,7 +316,7 @@ public class AulaDAO extends CRUD{
 
                 rsetF = buscarPorIdR(id, "flash_card");
                 while (rsetF.next()) {
-                    Flash_card flash = new Flash_card(rsetF.getInt("id"), rsetF.getString("flash_card"), rsetF.getInt("id_aula"));
+                    Flash_card flash = new Flash_card(rsetF.getInt("id"), rsetF.getString("frente"), rsetF.getString("verso"), rsetF.getInt("id_aula"));
                     liF.add(flash);
                 }
 
@@ -355,7 +332,7 @@ public class AulaDAO extends CRUD{
                     liT.add(texto);
                 }
 
-                Aula aula = new Aula(rsetA.getInt("id"), rsetA.getString("descricao"), rsetA.getString("nome"), rsetA.getInt("id_aula"), liT, liF, liL);
+                Aula aula = new Aula(rsetA.getInt("id"), rsetA.getString("nome"), rsetA.getInt("id_curso"), liT, liF, liL);
                 liAU.add(aula);
             }
 

@@ -12,15 +12,12 @@ public class Conexao {
         Connection conn = null;
         try {
             Class.forName("org.postgresql.Driver");
-            Dotenv dotenv = Dotenv.load();
-
+            Dotenv dotenv = Dotenv.configure().load();
 
             String url_db = dotenv.get("URL_DB");
             String user_db = dotenv.get("USER_DB");
             String password_db = dotenv.get("PASSWORD_DB");
-            conn = DriverManager.getConnection(
-                    url_db,
-                    user_db, password_db);
+            conn = DriverManager.getConnection(url_db, user_db, password_db);
         }catch (Exception e){
             ExceptionHandler eh = new ExceptionHandler(e);
             eh.printExeption();

@@ -55,41 +55,16 @@
     <div class="campos">
         <form action="buscaAdm" method="get">
             <label>ID</label>
-            <input type="number" placeholder="ID" name="id" id="id" width="150px">
+            <input type="number" placeholder="ID" name="id" id="id" width="50px">
             <label>Email</label>
             <input type="email" placeholder="Email" name="email" id="email"/>
             <button type="submit" id="buscar" value="filtro" name="acao">Buscar</button>
             <button type="submit" id="buscaGeral" value="geral" name="acao">Buscar Todos</button>
         </form>
     </div>
+    <div id="erro" style="margin-left: 560px"><h3 style="text-align: center">Um erro ocorreu, verifique se os campos foram prenchidos corretamente</h3></div>
     <div class="tabela">
-        <table>
-            <thead>
-            <tr>
-                <td>ID</td>
-                <td>Email</td>
-                <td>Senha</td>
-            </tr>
-            </thead>
-            <tbody>
-            <%
-                List<Adm> adms = (List<Adm>) request.getAttribute("list");
-                for (int i = 0; i < adms.size(); i++) {
-                    String email = adms.get(i).getEmail();
-                    int id = adms.get(i).getId();
-                    String senha = adms.get(i).getSenha();
-            %>
-            <tr>
-                <td name="idBusca"><%= id%></td>
-                <td name="emailBusca"><%= email%></td>
-                <td name="senhaBusca"><%= senha%></td>
-            </tr>
-            <%
-                }
-            %>
 
-            </tbody>
-        </table>
     </div>
 </main>
 </body>

@@ -62,7 +62,6 @@ public class Main {
 //    FornecedorDAO fornecedorDAO = new FornecedorDAO();
 //    System.out.println(fornecedorDAO.buscar());
         try {
-            AdmDAO admDAO = new AdmDAO();
 //            int id=1;
 //            List<Adm> liA = new ArrayList<>();
 //            liA=admDAO.buscarId(id);
@@ -72,7 +71,11 @@ public class Main {
 //            else{
 //                System.out.println("Erro");
 //            }
-            System.out.println(0/0);
+//            System.out.println(admDAO.buscar()  );
+
+
+            AdmDAO admDAO = new AdmDAO();
+            System.out.println(admDAO.buscarPorEmail("joao.psouza@germinare.org.br"));
         }catch (Exception e){
             ExceptionHandler eh = new ExceptionHandler(e);
             eh.printExeption();

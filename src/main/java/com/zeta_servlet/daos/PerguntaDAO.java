@@ -3,7 +3,8 @@ package com.zeta_servlet.daos;
 import com.zeta_servlet.daos.JDBC.Conexao;
 import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
 import com.zeta_servlet.CRUD.CRUD;
-import com.zeta_servlet.model.Flash_card;
+import com.zeta_servlet.model.Pergunta;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,22 +13,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Flash_cardDAO extends CRUD{
+public class PerguntaDAO extends CRUD{
 
-//  insere um flash card no banco
-    public int inserir(Flash_card flash) {
+    //    insere um item na tabela
+    public int inserir(Pergunta pt) {
         Connection conn = null;
         Conexao conexao = new Conexao();
         try {
 
-            conn = conexao.conectar(); // abre a conexão com o banco
-            String consulta = "insert into flash_card(frente, verso, id_aula) values(?, ?, ?)";
-            PreparedStatement pstmt = conn.prepareStatement(consulta);
-            //Setando valores dos parametros
-            pstmt.setString(1, flash.getFrente());
-            pstmt.setString(1, flash.getVerso());
-            pstmt.setInt(2, flash.getId_aula());
 
+            //query alternativas
+            String consultaFlash = "insert into pergunta(pergunta, id_ativade) values(?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(consultaFlash);
+            pstmt.setString(1, pt.getPergunta());
+            pstmt.setInt(2, pt.getId_atividade());
 
 
             if (pstmt.executeUpdate() >0){
@@ -38,6 +37,7 @@ public class Flash_cardDAO extends CRUD{
         catch (SQLException | NullPointerException | IndexOutOfBoundsException | IllegalArgumentException | IllegalStateException e){
             ExceptionHandler eh = new ExceptionHandler(e);
             eh.printExeption();
+            e.printStackTrace();
             return -1;
         }
         catch (Exception e) {
@@ -50,70 +50,15 @@ public class Flash_cardDAO extends CRUD{
         }
     }
 
-//    altera o flash card frente
-    public int updateFrente(Flash_card flash) {
+//  altera a pontuação da atividade
+
+    public int updateAlternativa(Pergunta pt, String pergunta) {
         Conexao conexao = new Conexao();
         Connection coon = conexao.conectar();
         try {
-            PreparedStatement pstm = coon.prepareStatement("UPDATE flash_card SET frente = ? WHERE id = ?;");
-            pstm.setString(1, flash.getFrente());
-            pstm.setInt(2, flash.getId());
-            if (pstm.executeUpdate()>0){
-                return 1;
-
-            }  return 0;
-        }
-        catch (SQLException | NullPointerException | IndexOutOfBoundsException | IllegalArgumentException | IllegalStateException e){
-            ExceptionHandler eh = new ExceptionHandler(e);
-            eh.printExeption();
-            return -1;
-        }
-        catch (Exception e){
-            ExceptionHandler eh = new ExceptionHandler(e);
-            eh.printExeption();
-            return -1;
-        }
-        finally {
-            conexao.desconectar(coon);
-        }
-    }
-
-    //    altera o flash card verso
-    public int updateVerso(Flash_card flash) {
-        Conexao conexao = new Conexao();
-        Connection coon = conexao.conectar();
-        try {
-            PreparedStatement pstm = coon.prepareStatement("UPDATE flash_card SET verso = ? WHERE id = ?;");
-            pstm.setString(1, flash.getVerso());
-            pstm.setInt(2, flash.getId());
-            if (pstm.executeUpdate()>0){
-                return 1;
-
-            }  return 0;
-        }
-        catch (SQLException | NullPointerException | IndexOutOfBoundsException | IllegalArgumentException | IllegalStateException e){
-            ExceptionHandler eh = new ExceptionHandler(e);
-            eh.printExeption();
-            return -1;
-        }
-        catch (Exception e){
-            ExceptionHandler eh = new ExceptionHandler(e);
-            eh.printExeption();
-            return -1;
-        }
-        finally {
-            conexao.desconectar(coon);
-        }
-    }
-
-//    altera a aula do flash card
-    public int updateIdAula(Flash_card flash) {
-        Conexao conexao = new Conexao();
-        Connection coon = conexao.conectar();
-        try {
-            PreparedStatement pstm = coon.prepareStatement("UPDATE flash_card SET id_aula = ? WHERE id = ?;");
-            pstm.setInt(1, flash.getId_aula());
-            pstm.setInt(2, flash.getId());
+            PreparedStatement pstm = coon.prepareStatement("UPDATE pergunta SET pergunta = ? WHERE id = ?;");
+            pstm.setString(1, pergunta);
+            pstm.setInt(2, pt.getId());
             if (pstm.executeUpdate()>0){
                 return 1;
 
@@ -129,28 +74,47 @@ public class Flash_cardDAO extends CRUD{
         }
     }
 
-//    remove um flash card
-    public boolean remover(int id) {return super.remover(id, "flash_card");}
+    public int updateIdAtividade (Pergunta pt, int idAtividade) {
+        Conexao conexao = new Conexao();
+        Connection coon = conexao.conectar();
+        try {
+            PreparedStatement pstm = coon.prepareStatement("UPDATE pergunta SET id_atividade = ? WHERE id = ?;");
+            pstm.setInt(1, idAtividade);
+            pstm.setInt(2, pt.getId());
+            if (pstm.executeUpdate()>0){
+                return 1;
 
-//    seleciona todos os flash cards da tabela
-    public List<Flash_card> buscar() {
+            }  return 0;
+        }
+        catch (Exception e){
+            ExceptionHandler eh = new ExceptionHandler(e);
+            eh.printExeption();
+            return -1;
+        }
+        finally {
+            conexao.desconectar(coon);
+        }
+    }
+
+
+    //    remove uma atividade
+    public boolean remover(int id) {return super.remover(id, "pergunta");}
+
+    //    seleciona todas as atividades da tabela
+    public List<Pergunta> buscar() {
         //query
-        List<Flash_card> liF = new ArrayList<>();
-        ResultSet rset = null;
+        List<Pergunta> liPT = new ArrayList<>();
+        ResultSet rsetP = null;
         Conexao conexao = new Conexao();
         Connection conn = conexao.conectar();
         try {
 
-            rset = buscarR("flash_card");
 
-
-
-            while (rset.next()) {
-                Flash_card flash = new Flash_card(rset.getInt("id"), rset.getString("frente"), rset.getString("verso"), rset.getInt("id_aula"));
-                liF.add(flash);
+            rsetP = buscarR("Pergunta");
+            while (rsetP.next()) {
+                Pergunta pergunta = new Pergunta(rsetP.getInt("id"), rsetP.getString("pergunta"), rsetP.getInt("id_atividade"));
+                liPT.add(pergunta);
             }
-
-
         }
         catch (SQLException | NullPointerException | IndexOutOfBoundsException | IllegalArgumentException | IllegalStateException e){
             ExceptionHandler eh = new ExceptionHandler(e);
@@ -162,30 +126,63 @@ public class Flash_cardDAO extends CRUD{
         }
         finally {
             conexao.desconectar(conn);
-            return liF;
+            return liPT;
+        }
+    }
+
+//    busca uma atividade por ID
+
+    public List<Pergunta> buscarPorId(int id) {
+        //query
+
+        List<Pergunta> liPT = new ArrayList<>();
+        ResultSet rsetP = null;
+        Conexao conexao = new Conexao();
+        Connection conn = conexao.conectar();
+        try {
+
+
+
+            rsetP = buscarPorIdR(id, "pergunta");
+            while (rsetP.next()) {
+                Pergunta pergunta = new Pergunta(rsetP.getInt("id"), rsetP.getString("pergunta"), rsetP.getInt("id_atividade"));
+                liPT.add(pergunta);
+            }
+        }
+        catch (SQLException | NullPointerException | IndexOutOfBoundsException | IllegalArgumentException | IllegalStateException e){
+            ExceptionHandler eh = new ExceptionHandler(e);
+            eh.printExeption();
+        }
+        catch (Exception e) {
+            ExceptionHandler eh = new ExceptionHandler(e);
+            eh.printExeption();
+        }
+        finally {
+            conexao.desconectar(conn);
+            return liPT;
         }
     }
 
 
-//    busca o item da tabela com base no flash card
-    public List<Flash_card> buscarPorFlashCard(String flash_card) {
+//    busca atividades com base na pontuação
+
+    public List<Pergunta> buscarPorPergunta(String pergunta) {
         //query
-        List<Flash_card> liF = new ArrayList<>();
-        ResultSet rset = null;
+        List<Pergunta> liPT = new ArrayList<>();
+
+        ResultSet rsetP = null;
         Conexao conexao = new Conexao();
         Connection conn = conexao.conectar();
         try {
-            String busca = "SELECT * FROM flash_card WHERE flash_card = ?";
+            String busca = "SELECT * FROM pergunta WHERE pergunta = ?";
             PreparedStatement pstm = conn.prepareStatement(busca);
-            pstm.setString(1, flash_card);
-            rset = pstm.executeQuery();
+            pstm.setString(1, pergunta);
+            rsetP = pstm.executeQuery();
 
 
-
-
-            while (rset.next()) {
-                Flash_card flash = new Flash_card(rset.getInt("id"), rset.getString("frente"), rset.getString("verso"), rset.getInt("id_aula"));
-                liF.add(flash);
+            while (rsetP.next()) {
+                Pergunta pergunta1 = new Pergunta(rsetP.getInt("id"), rsetP.getString("pergunta"), rsetP.getInt("id_atividade"));
+                liPT.add(pergunta1);
             }
 
         }
@@ -199,29 +196,30 @@ public class Flash_cardDAO extends CRUD{
         }
         finally {
             conexao.desconectar(conn);
-            return liF;
+            return liPT;
         }
     }
 
-//    seleciona o flash card com base na aula
-    public List<Flash_card> buscarPorIdAula(int id_aula) {
+
+//    busca atividade com base na aula
+
+    public List<Pergunta> buscarPorIdAula(int idAula) {
         //query
-        List<Flash_card> liF = new ArrayList<>();
-        ResultSet rset = null;
+        List<Pergunta> liPT = new ArrayList<>();
+
+        ResultSet rsetP = null;
         Conexao conexao = new Conexao();
         Connection conn = conexao.conectar();
         try {
-            String busca = "SELECT * FROM flash_cards WHERE id_aula = ?";
+            String busca = "SELECT * FROM pergunta WHERE id_aula = ?";
             PreparedStatement pstm = conn.prepareStatement(busca);
-            pstm.setInt(1, id_aula);
-            rset = pstm.executeQuery();
+            pstm.setInt(1, idAula);
+            rsetP = pstm.executeQuery();
 
 
-
-
-            while (rset.next()) {
-                Flash_card flash = new Flash_card(rset.getInt("id"), rset.getString("frente"), rset.getString("verso"), rset.getInt("id_aula"));
-                liF.add(flash);
+            while (rsetP.next()) {
+                Pergunta pergunta = new Pergunta(rsetP.getInt("id"), rsetP.getString("pergunta"), rsetP.getInt("id_atividade"));
+                liPT.add(pergunta);
             }
 
         }
@@ -235,9 +233,7 @@ public class Flash_cardDAO extends CRUD{
         }
         finally {
             conexao.desconectar(conn);
-            return liF;
+            return liPT;
         }
     }
-
-
 }

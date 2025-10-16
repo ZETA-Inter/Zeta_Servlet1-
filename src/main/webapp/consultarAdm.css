@@ -137,6 +137,7 @@ nav > .menu > input:checked + label::after{
 .campos{
     text-align: center;
     margin-top: 50px;
+    align-items: center;
 }
 .campos > form{
     display: flex;
@@ -160,7 +161,8 @@ nav > .menu > input:checked + label::after{
     border: 3px solid #18a4e1;
 }
 #id{
-    width: 50px;
+    field-sizing: content;
+    width: 100px;
 }
 #email{
     width: 450px;
@@ -197,5 +199,18 @@ td,th{
 }
 tr:nth-child(even){
     background-color: rgb(255, 249, 240);
+}
+
+#erro{
+    color: white;
+    width: 400px;
+    border-radius: 50px;
+    text-align: center;
+    margin-top: 30px;
+    margin-left: 1000px;
+}
+
+#erro>h3{
+    color: red;
 }
 

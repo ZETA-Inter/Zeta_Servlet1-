@@ -17,7 +17,7 @@ body {
     height: 80.198px;
     color: #043253;
     font-size: 25px;
-    font-weight: 500px;
+    font-weight: 500;
     display: flex;
     gap: 16px;
 }
@@ -119,21 +119,18 @@ nav > .menu > input:checked + label::after{
     transform: scale(1.3);
 }
 
-
-.atualizarADM > h1{
+.inserirADM > h1{
     width: 100%;
-    font-size: 80px;
+    font-size: 50px;
     color: #043253;
     text-align: center;
     font-weight: lighter;
-    margin-top: 50px;
+    margin-top: 100px;
+    margin-right: -15px;
 }
-.atualizarADM > h2{
-    color: #18a4e1;
-    width: 100%;
-    text-align: center;
-    font-weight: lighter;
-    margin-top: -60px;
+
+.inserirADM{
+    margin-top: 60px;
 }
 .campos{
     text-align: center;
@@ -145,10 +142,8 @@ nav > .menu > input:checked + label::after{
     height: 20%;
     margin: 0 auto;
     gap: 30px;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
 }
-.campos > form > div > input{
+.campos > form > input{
     border: 2px solid #18a4e1;
     border-radius: 15px;
     box-shadow: 1px 1px 3px;
@@ -157,13 +152,12 @@ nav > .menu > input:checked + label::after{
     font-size: 16px;
     font-weight: lighter;
     outline: none;
-    align-items: center;
 }
-.campos > form > div > input:active{
+.campos > form > input:active{
     border: 3px solid #18a4e1;
 }
 
-.campos > form > div > button{
+.campos > a > button{
     border-radius: 20px;
     width: 200px;
     height: 50px;
@@ -175,9 +169,8 @@ nav > .menu > input:checked + label::after{
     margin: 0 auto;
     cursor: pointer;
     transition: 0.3s ease;
-    margin-top: 20px;
 }
-.campos > form > div > button:hover{
+.campos > a > button:hover{
     background-color: #0076B6;
     transform: scale(1.1);
 }

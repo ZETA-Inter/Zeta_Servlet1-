@@ -9,7 +9,14 @@ public class Adm {
         this.email = email;
         this.id = id;
         this.senha = senha;
-    }//contrutor
+    }
+
+    public Adm(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
+    }
+
+    //contrutor
 
     public String getEmail() {
         return this.email;

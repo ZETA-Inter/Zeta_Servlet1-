@@ -72,7 +72,8 @@ public class Main {
 //            else{
 //                System.out.println("Erro");
 //            }
-            System.out.println(0/0);
+            System.out.println(admDAO.buscar());
+            System.out.println(admDAO.buscarPorEmail("JoaoPSouza@gmail.com"));
         }catch (Exception e){
             ExceptionHandler eh = new ExceptionHandler(e);
             eh.printExeption();

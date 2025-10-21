@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="removerAdm.css">
-    <link rel="shortcut icon" href="./assets/LOGO ZETA - 5.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/LOGO ZETA - 5.png" type="image/x-icon">
     <title>Remover ADM</title>
 </head>
 <body>
     <header class="header">
         <div class="container">
             <div class="logo">
-                <img src="./assets/Group 12229.svg" alt="Logo ZETA">
+                <img src="../assets/Group 12229.svg" alt="Logo ZETA">
                 <span class="logo-text">ZETA</span>
             </div>
             <nav class="nav">
                 <div class="menu">
                     <input type="radio" name="link" id="Home">
-                    <label for="Home"><a href="admin.html">Início</a></label>
+                    <label for="Home"><a href="/index.html">Início</a></label>
                 </div>
             </nav>
         </div>
@@ -30,29 +30,30 @@
         </div>
         <div class="sidebar">
             <div class="icon active">
-                <a href="menuAdm.html">
-                    <img src="./assets/icon1BarADM.svg" alt="Ícone 1">
+                <a href="../index.html">
+                    <img src="../assets/icon1BarADM.svg" alt="Ícone 1">
                 </a>
             </div>
             <div class="icon">
-                <img src="./assets/icon2BarADM.svg" alt="Ícone 2">
+                <img src="../assets/icon2BarADM.svg" alt="Ícone 2">
             </div>
             <div class="icon">
-                <img src="./assets/icon3BarADM.svg" alt="Ícone 3">
+                <img src="../assets/icon3BarADM.svg" alt="Ícone 3">
             </div>
             <div class="icon">
-                <img src="./assets/icon4BarADM.svg" alt="Ícone 4">
+                <img src="../assets/icon4BarADM.svg" alt="Ícone 4">
             </div>
             <div class="icon">
-                <img src="./assets/icon5BarADM.svg" alt="Ícone 5">
+                <img src="../assets/icon5BarADM.svg" alt="Ícone 5">
             </div>
             <div class="icon">
-                <img src="./assets/icon6BarADM.svg" alt="Ícone 6">
+                <img src="../assets/icon6BarADM.svg" alt="Ícone 6">
             </div>
         </div>
         <div class="campos">
-            <form>
-                <input type="number" placeholder="ID Administrador" name="email" id="email"/>
+            <form action="/ZETA_Servlet/AdmServlet" method="post">
+                <input type="hidden" name="action" value="removerAdm">
+                <input type="number" placeholder="ID Administrador" name="id" id="id"/>
                 <button type="submit">Remover</button>
             </form>
         </div>

@@ -1,4 +1,4 @@
-package com.zeta_servlet.controller;
+package com.zeta_servlet.controller.Adm;
 
 import com.zeta_servlet.daos.AdmDAO;
 import com.zeta_servlet.model.Adm;

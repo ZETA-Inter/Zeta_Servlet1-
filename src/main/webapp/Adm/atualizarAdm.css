@@ -17,7 +17,7 @@ body {
     height: 80.198px;
     color: #043253;
     font-size: 25px;
-    font-weight: 500px;
+    font-weight: 500;
     display: flex;
     gap: 16px;
 }
@@ -119,7 +119,8 @@ nav > .menu > input:checked + label::after{
     transform: scale(1.3);
 }
 
-.consultarADM > h1{
+
+.atualizarADM > h1{
     width: 100%;
     font-size: 80px;
     color: #043253;
@@ -127,7 +128,7 @@ nav > .menu > input:checked + label::after{
     font-weight: lighter;
     margin-top: 50px;
 }
-.consultarADM > h2{
+.atualizarADM > h2{
     color: #18a4e1;
     width: 100%;
     text-align: center;
@@ -137,16 +138,19 @@ nav > .menu > input:checked + label::after{
 .campos{
     text-align: center;
     margin-top: 50px;
+    margin-left: 25%;
 }
 .campos > form{
-    display: flex;
-    align-items: center;
-    width: 100%;
+    display: grid;
+    width: 37%;
     height: 20%;
-    margin-left: 270px;
-    column-gap: 30px;
+    gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    margin-top: 20px;
 }
-.campos > form > input{
+
+.campos > form > div > input{
     border: 2px solid #18a4e1;
     border-radius: 15px;
     box-shadow: 1px 1px 3px;
@@ -155,47 +159,27 @@ nav > .menu > input:checked + label::after{
     font-size: 16px;
     font-weight: lighter;
     outline: none;
+    align-items: center;
 }
-.campos > form > input:active{
+.campos > form > div > input:active{
     border: 3px solid #18a4e1;
 }
-#id{
-    width: 50px;
-}
-#email{
-    width: 450px;
-}
 
-.campos > form > button{
-    border-radius: 30px;
-    width: 145px;
-    height: 70px;
+.campos > form > div > button{
+    border-radius: 20px;
+    width: 200px;
+    height: 50px;
     border: solid;
     font-family: 'Poppins', serif;
     font-size: 20px;
     color: aliceblue;
     background-color: #18a4e1;
-    
+    margin: 0 auto;
     cursor: pointer;
     transition: 0.3s ease;
+    margin-top: 20px;
 }
-.campos > form > button:hover{
+.campos > form > div > button:hover{
     background-color: #0076B6;
     transform: scale(1.1);
 }
-.tabela > table{
-    margin: 0 auto;
-    margin-top: 20px;
-    border-collapse: collapse;
-}
-thead{
-    background-color: #18a4e1;
-    color: aliceblue;
-}
-td,th{
-    padding: 5px;
-}
-tr:nth-child(even){
-    background-color: rgb(255, 249, 240);
-}
-

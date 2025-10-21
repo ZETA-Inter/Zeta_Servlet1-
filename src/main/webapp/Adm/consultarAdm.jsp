@@ -2,15 +2,12 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en" xmlns:jsp="http://java.sun.com/JSP/Page">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Adm/consultarAdm.css">
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/LOGO ZETA - 5.png"
+    <link rel="shortcut icon" href="../assets/LOGO ZETA - 5.png"
           type="image/x-icon">
     <title>Consultar ADM</title>
 </head>
@@ -24,8 +21,7 @@
         <nav class="nav">
             <div class="menu">
                 <input type="radio" name="link" id="Home">
-                <label for="Home"><a
-                        href="${pageContext.request.contextPath}/index.html">Início</a></label>
+                <label for="Home"><a href="${pageContext.request.contextPath}/index.html">Início</a></label>
             </div>
         </nav>
     </div>
@@ -58,7 +54,6 @@
     <div class="campos">
         <form id="admForm" action="/ZETA_Servlet/AdmServlet"
               method="get" onsubmit="return validarFormulario()">
-            <label for="inputBusca">Buscar</label>
 
             <div class="input-wrapper">
                 <div class="selection-indicator"
@@ -71,8 +66,7 @@
                        value="buscarPorId">
                 <div class="error-message" id="errorMessage"></div>
             </div>
-
-            <button type="submit">Buscar</button>
+                <button type="submit">Buscar</button>
         </form>
 
         <!-- pop-up com opções -->
@@ -86,7 +80,41 @@
         </div>
     </div>
 
+    <div class="tabela">
+        <table>
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Email</td>
+                <td>Senha</td>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+                @SuppressWarnings("unchecked")
+                List<Adm> adms = (List<Adm>) request.getAttribute("adms");
+                if (adms != null && !adms.isEmpty()) {
+                    for (Adm adm : adms) {
+            %>
+            <tr>
+                <td><%= adm.getId() %></td>
+                <td><%= adm.getEmail() %></td>
+                <td><%= adm.getSenha() %></td>
+            </tr>
+            <%
+                }
+            } else {
+            %>
+            <tr>
+                <td colspan="3">Nenhum administrador encontrado</td>
+            </tr>
+            <%
+                }
+            %>
+            </tbody>
+        </table>
     </div>
+
 </main>
 
 <script>
@@ -211,37 +239,6 @@
         }
     });
 </script>
-<div class="tabela">
-    <table>
-        <thead>
-        <tr>
-            <td>ID</td>
-            <td>Email</td>
-            <td>Senha</td>
-        </tr>
-        </thead>
-        <tbody>
-        <%
-            @SuppressWarnings("unchecked")
-            List<Adm> adms = (List<Adm>) request.getAttribute("adms");
-            if (adms != null && !adms.isEmpty()) {
-                for (Adm adm : adms) {
-        %>
-        <tr>
-            <td><%= adm.getId() %></td>
-            <td><%= adm.getEmail() %></td>
-            <td><%= adm.getSenha() %></td>
-        </tr>
-        <%
-            }
-        } else {
-        %>
-        <tr>
-            <td colspan="3">Nenhum administrador encontrado</td>
-        </tr>
-        <%
-            }
-        %>
-        </tbody>
-    </table>
-</div>
+
+</body>
+</html>

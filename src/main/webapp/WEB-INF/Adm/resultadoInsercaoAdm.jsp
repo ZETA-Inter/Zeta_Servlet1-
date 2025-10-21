@@ -1,20 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: matheusraimundo-ieg
-  Date: 13/10/2025
-  Time: 23:41
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Adm/atualizarAdm.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/LOGO ZETA - 5.png" type="image/x-icon">
-    <title>Atualizar ADM</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Adm/respostaCriarAdm.css">
+    <title>Criar ADM</title>
 </head>
 <body>
 <header class="header">
@@ -32,12 +26,12 @@
     </div>
 </header>
 <main>
-    <div class="atualizarADM">
-        <h1>${mensagem}</h1>
+    <div class="inserirADM">
+        <h1>Adm inserido com sucesso</h1>
     </div>
     <div class="sidebar">
         <div class="icon active">
-            <a href="${pageContext.request.contextPath}/index.html">
+            <a href="${pageContext.request.contextPath}/menuAdm.html">
                 <img src="${pageContext.request.contextPath}/assets/icon1BarADM.svg" alt="Ícone 1">
             </a>
         </div>
@@ -57,7 +51,9 @@
             <img src="${pageContext.request.contextPath}/assets/icon6BarADM.svg" alt="Ícone 6">
         </div>
     </div>
+    <div class="campos">
+        <a href="${pageContext.request.contextPath}/Adm/CriarAdm.html"><button type="submit">Inserir outro</button></a>
+    </div>
 </main>
 </body>
 </html>
-

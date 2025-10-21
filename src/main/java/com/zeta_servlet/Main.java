@@ -1,5 +1,6 @@
 package com.zeta_servlet;
 import com.zeta_servlet.daos.AdmDAO;
+import com.zeta_servlet.daos.AssinaturaDAO;
 import com.zeta_servlet.daos.FornecedorDAO;
 import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
 import com.zeta_servlet.model.Adm;
@@ -62,6 +63,7 @@ public class Main {
 //    FornecedorDAO fornecedorDAO = new FornecedorDAO();
 //    System.out.println(fornecedorDAO.buscar());
         try {
+
             AdmDAO admDAO = new AdmDAO();
 //            int id=1;
 //            List<Adm> liA = new ArrayList<>();
@@ -74,6 +76,11 @@ public class Main {
 //            }
             System.out.println(admDAO.buscar());
             System.out.println(admDAO.buscarPorEmail("JoaoPSouza@gmail.com"));
+//            System.out.println(admDAO.buscar()  );
+
+
+            AssinaturaDAO assinaturaDAO = new AssinaturaDAO();
+            System.out.println(assinaturaDAO.buscar());
         }catch (Exception e){
             ExceptionHandler eh = new ExceptionHandler(e);
             eh.printExeption();

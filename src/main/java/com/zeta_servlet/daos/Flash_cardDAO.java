@@ -12,50 +12,103 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Flash_cardDAO extends CRUD{
+public class Flash_cardDAO extends CRUD {
 
-//  insere um flash card no banco
+    //  insere um flash card no banco
     public int inserir(Flash_card flash) {
         Connection conn = null;
         Conexao conexao = new Conexao();
         try {
 
             conn = conexao.conectar(); // abre a conexão com o banco
-            String consulta = "insert into flash_card(flash_card, id_aula) values(?, ?)";
+            String consulta = "insert into flash_card(frente, verso, id_aula) values(?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(consulta);
             //Setando valores dos parametros
-            pstmt.setString(1, flash.getFlash_card());
+            pstmt.setString(1, flash.getFrente());
+            pstmt.setString(1, flash.getVerso());
             pstmt.setInt(2, flash.getId_aula());
 
 
-
-            if (pstmt.executeUpdate() >0){
+            if (pstmt.executeUpdate() > 0) {
                 return 1;
             }
             return 0;
-        }
-        catch (SQLException | NullPointerException | IndexOutOfBoundsException | IllegalArgumentException | IllegalStateException e){
+        } catch (SQLException | NullPointerException | IndexOutOfBoundsException | IllegalArgumentException |
+                 IllegalStateException e) {
             ExceptionHandler eh = new ExceptionHandler(e);
             eh.printExeption();
             return -1;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             ExceptionHandler eh = new ExceptionHandler(e);
             eh.printExeption();
             return -1;
-        }
-        finally {
+        } finally {
             conexao.desconectar(conn);
         }
     }
 
-//    altera o flash card
+    //    altera o flash card
     public int updateFlashCard(Flash_card flash) {
         Conexao conexao = new Conexao();
         Connection coon = conexao.conectar();
         try {
             PreparedStatement pstm = coon.prepareStatement("UPDATE flash_card SET flash_card = ? WHERE id = ?;");
             pstm.setString(1, flash.getFlash_card());
+            if (pstm.executeUpdate()>0){
+                return 1;
+
+            }  return 0;
+
+        } catch (SQLException | NullPointerException | IndexOutOfBoundsException | IllegalArgumentException |
+                 IllegalStateException e) {
+            ExceptionHandler eh = new ExceptionHandler(e);
+            eh.printExeption();
+            return -1;
+        } catch (Exception e) {
+            ExceptionHandler eh = new ExceptionHandler(e);
+            eh.printExeption();
+            return -1;
+        } finally {
+            conexao.desconectar(coon);
+        }
+    }
+
+
+//    altera o flash card frente
+    public int updateFrente(Flash_card flash) {
+        Conexao conexao = new Conexao();
+        Connection coon = conexao.conectar();
+        try {
+            PreparedStatement pstm = coon.prepareStatement("UPDATE flash_card SET frente = ? WHERE id = ?;");
+            pstm.setString(1, flash.getFrente());
+            pstm.setInt(2, flash.getId());
+            if (pstm.executeUpdate()>0){
+                return 1;
+
+            }  return 0;
+        }
+        catch (SQLException | NullPointerException | IndexOutOfBoundsException | IllegalArgumentException | IllegalStateException e){
+            ExceptionHandler eh = new ExceptionHandler(e);
+            eh.printExeption();
+            return -1;
+        }
+        catch (Exception e){
+            ExceptionHandler eh = new ExceptionHandler(e);
+            eh.printExeption();
+            return -1;
+        }
+        finally {
+            conexao.desconectar(coon);
+        }
+    }
+
+    //    altera o flash card verso
+    public int updateVerso(Flash_card flash) {
+        Conexao conexao = new Conexao();
+        Connection coon = conexao.conectar();
+        try {
+            PreparedStatement pstm = coon.prepareStatement("UPDATE flash_card SET verso = ? WHERE id = ?;");
+            pstm.setString(1, flash.getVerso());
             pstm.setInt(2, flash.getId());
             if (pstm.executeUpdate()>0){
                 return 1;
@@ -117,7 +170,7 @@ public class Flash_cardDAO extends CRUD{
 
 
             while (rset.next()) {
-                Flash_card flash = new Flash_card(rset.getInt("id"), rset.getString("flash_card"), rset.getInt("id_aula"));
+                Flash_card flash = new Flash_card(rset.getInt("id"), rset.getString("frente"), rset.getString("verso"), rset.getInt("id_aula"));
                 liF.add(flash);
             }
 
@@ -155,7 +208,7 @@ public class Flash_cardDAO extends CRUD{
 
 
             while (rset.next()) {
-                Flash_card flash = new Flash_card(rset.getInt("id"), rset.getString("flash_card"), rset.getInt("id_aula"));
+                Flash_card flash = new Flash_card(rset.getInt("id"), rset.getString("frente"), rset.getString("verso"), rset.getInt("id_aula"));
                 liF.add(flash);
             }
 
@@ -191,7 +244,7 @@ public class Flash_cardDAO extends CRUD{
 
 
             while (rset.next()) {
-                Flash_card flash = new Flash_card(rset.getInt("id"), rset.getString("flash_card"), rset.getInt("id_aula"));
+                Flash_card flash = new Flash_card(rset.getInt("id"), rset.getString("frente"), rset.getString("verso"), rset.getInt("id_aula"));
                 liF.add(flash);
             }
 
@@ -209,6 +262,5 @@ public class Flash_cardDAO extends CRUD{
             return liF;
         }
     }
-
 
 }

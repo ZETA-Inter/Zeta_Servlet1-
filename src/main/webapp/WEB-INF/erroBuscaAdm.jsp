@@ -1,0 +1,71 @@
+<%@ page import="com.zeta_servlet.model.Adm" %>
+<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="consultarAdm.css">
+    <link rel="shortcut icon" href="./assets/LOGO ZETA - 5.png" type="image/x-icon">
+    <title>Consultar ADM</title>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <img src="./assets/Group 12229.svg" alt="Logo ZETA">
+            <span class="logo-text">ZETA</span>
+        </div>
+        <nav class="nav">
+            <div class="menu">
+                <input type="radio" name="link" id="Home">
+                <label for="Home"><a href="admin.html">Início</a></label>
+            </div>
+        </nav>
+    </div>
+</header>
+<main>
+    <div class="consultarADM">
+        <h1>Consultar ADM</h1>
+        <h2>Procure pelos seguintes campos</h2>
+    </div>
+    <div class="sidebar">
+        <div class="icon active">
+            <a href="menuAdm.html">
+                <img src="./assets/icon1BarADM.svg" alt="Ícone 1">
+            </a>
+        </div>
+        <div class="icon">
+            <img src="./assets/icon2BarADM.svg" alt="Ícone 2">
+        </div>
+        <div class="icon">
+            <img src="./assets/icon3BarADM.svg" alt="Ícone 3">
+        </div>
+        <div class="icon">
+            <img src="./assets/icon4BarADM.svg" alt="Ícone 4">
+        </div>
+        <div class="icon">
+            <img src="./assets/icon5BarADM.svg" alt="Ícone 5">
+        </div>
+        <div class="icon">
+            <img src="./assets/icon6BarADM.svg" alt="Ícone 6">
+        </div>
+    </div>
+    <div class="campos">
+        <form action="buscaAdm" method="get">
+            <label>ID</label>
+            <input type="number" placeholder="ID" name="id" id="id" width="50px">
+            <label>Email</label>
+            <input type="email" placeholder="Email" name="email" id="email"/>
+            <button type="submit" id="buscar" value="filtro" name="acao">Buscar</button>
+            <button type="submit" id="buscaGeral" value="geral" name="acao">Buscar Todos</button>
+        </form>
+    </div>
+    <div id="erro" style="margin-left: 560px"><h3 style="text-align: center">Um erro ocorreu, verifique se os campos foram prenchidos corretamente</h3></div>
+    <div class="tabela">
+
+    </div>
+</main>
+</body>
+</html>

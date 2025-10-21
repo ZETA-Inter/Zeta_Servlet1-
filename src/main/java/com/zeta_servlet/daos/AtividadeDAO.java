@@ -35,10 +35,12 @@ public class AtividadeDAO extends CRUD{
 
             //query alternativas
             for (int i = 0; i < atv.getAlternativas().size(); i++) {
-                String consultaFlash = "insert into alternativa(alternativa, id_ativade) values(?, ?)";
+
+                String consultaFlash = "insert into alternativa(alternativa, id_ativade, correto) values(?, ?, ?)";
                 PreparedStatement pstmtFlash = conn.prepareStatement(consultaFlash);
                 pstmt.setString(1, atv.getAlternativas().get(i).getAlternativa());
                 pstmt.setInt(2, atv.getAlternativas().get(i).getId_atividade());
+                pstmt.setBoolean(3, atv.getAlternativas().get(i).isCorreto());
             }
 
             //query pergunta
@@ -141,7 +143,7 @@ public class AtividadeDAO extends CRUD{
 
                 rsetAL = buscarPorIdR(id, "alternativa");
                 while (rsetAL.next()) {
-                    Alternativa alternativa = new Alternativa(rsetAL.getInt("id"), rsetAL.getString("alternativa"), rsetAL.getInt("id_atividade"));
+                    Alternativa alternativa = new Alternativa(rsetAL.getInt("id"), rsetAL.getString("alternativa"), rsetAL.getInt("id_atividade"), rsetAL.getBoolean("correto"));
                     liAL.add(alternativa);
                 }
 
@@ -194,7 +196,7 @@ public class AtividadeDAO extends CRUD{
             while (rsetAT.next()) {
                 rsetAL = buscarPorIdR(id, "alternativa");
                 while (rsetAL.next()) {
-                    Alternativa alternativa = new Alternativa(rsetAL.getInt("id"), rsetAL.getString("alternativa"), rsetAL.getInt("id_atividade"));
+                    Alternativa alternativa = new Alternativa(rsetAL.getInt("id"), rsetAL.getString("alternativa"), rsetAL.getInt("id_atividade"), rsetAL.getBoolean("correto"));
                     liAL.add(alternativa);
                 }
 
@@ -250,7 +252,7 @@ public class AtividadeDAO extends CRUD{
 
                 rsetAL = buscarPorIdR(id, "alternativa");
                 while (rsetAL.next()) {
-                    Alternativa alternativa = new Alternativa(rsetAL.getInt("id"), rsetAL.getString("alternativa"), rsetAL.getInt("id_atividade"));
+                    Alternativa alternativa = new Alternativa(rsetAL.getInt("id"), rsetAL.getString("alternativa"), rsetAL.getInt("id_atividade"), rsetAL.getBoolean("correto"));
                     liAL.add(alternativa);
                 }
 
@@ -306,7 +308,7 @@ public class AtividadeDAO extends CRUD{
 
                 rsetAL = buscarPorIdR(id, "alternativa");
                 while (rsetAL.next()) {
-                    Alternativa alternativa = new Alternativa(rsetAL.getInt("id"), rsetAL.getString("alternativa"), rsetAL.getInt("id_atividade"));
+                    Alternativa alternativa = new Alternativa(rsetAL.getInt("id"), rsetAL.getString("alternativa"), rsetAL.getInt("id_atividade"), rsetAL.getBoolean("correto"));
                     liAL.add(alternativa);
                 }
 
@@ -360,7 +362,7 @@ public class AtividadeDAO extends CRUD{
 
                 rsetAL = buscarPorIdR(id, "alternativa");
                 while (rsetAL.next()) {
-                    Alternativa alternativa = new Alternativa(rsetAL.getInt("id"), rsetAL.getString("alternativa"), rsetAL.getInt("id_atividade"));
+                    Alternativa alternativa = new Alternativa(rsetAL.getInt("id"), rsetAL.getString("alternativa"), rsetAL.getInt("id_atividade"), rsetAL.getBoolean("correto"));
                     liAL.add(alternativa);
                 }
 

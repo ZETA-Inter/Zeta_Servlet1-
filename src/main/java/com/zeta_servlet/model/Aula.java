@@ -12,10 +12,13 @@ public class Aula {
     List<Flash_card> flashCards;
     List<Lei> leis;
 
-
     public Aula(int id, String descricao, String nome, List<Texto_corrido> texto_corridos, List<Flash_card> flashCards, List<Lei> leis) {
         this.id = id;
         this.descricao = descricao;
+    }
+
+    public Aula(int id, String nome, int idCurso, List<Texto_corrido> texto_corridos, List<Flash_card> flashCards, List<Lei> leis) {
+        this.id = id;
         this.nome = nome;
         this.texto_corridos = texto_corridos;
         this.flashCards = flashCards;
@@ -30,6 +33,7 @@ public class Aula {
             flashCards.get(i).setId_aula(this.id);
         }
     }
+
     public Aula(int id, String descricao, String nome, int id_curso, List<Texto_corrido> texto_corridos, List<Flash_card> flashCards, List<Lei> leis) {
         this.id = id;
         this.descricao = descricao;
@@ -52,9 +56,11 @@ public class Aula {
         return id;
     }
 
+
     public String getDescricao() {
         return descricao;
     }
+
 
     public String getNome() {
         return nome;
@@ -75,8 +81,6 @@ public class Aula {
     public List<Lei> getLeis() {
         return leis;
     }
-
-
 
 
 }

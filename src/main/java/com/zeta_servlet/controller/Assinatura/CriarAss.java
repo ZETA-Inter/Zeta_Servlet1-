@@ -1,4 +1,4 @@
-package com.zeta_servlet.controller;
+package com.zeta_servlet.controller.Assinatura;
 
 import com.zeta_servlet.ExceptionHandler.ExceptionHandler;
 import com.zeta_servlet.daos.AssinaturaDAO;
